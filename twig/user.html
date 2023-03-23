@@ -1,3 +1,13 @@
+<!-- 7. на странице пользователя добавить форму
+и прикрутить возможно обновлять пользователя через форму
+пример ендпоинта, находится на строке 91 -->
+
+<!-- в html спецификации нет PUT метода, есть только POST и GET, но существуют хаки
+поэтому в форму нужно добавить скрытое поле
+<input type="hidden" name="_METHOD" value="PUT"> -->
+
+<!-- после обновления, делаем редирект на страницу с пользователями /users -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +32,19 @@
     <div class="container">
         <h1>{{user.first_name}} {{user.last_name}}</h1>
         <h2>{{user.email}}</h2>
+        <form name="backend" method="POST" action="/users/{{user.id}}">
+            <p>Name:
+            <input type="text" name="first_name" value="{{user.first_name}}"></p>
+
+            <p>Surname:
+            <input type="text" name="last_name" value="{{user.last_name}}"></p>
+
+            <p>Email:
+            <input type="email" name="email" value="{{user.email}}">
+            <p></p>
+            <button type="submit">Send</button>
+            <input type="hidden" name="_METHOD" value="PUT">
+        </form>
     </div>
 </body>
 </html>
